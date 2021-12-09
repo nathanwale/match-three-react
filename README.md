@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+# Match 3 in React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is an extension of React's Tic Tac Toe tutorial.
 
-## Available Scripts
+It's now on a 10 * 5 board by default.
 
-In the project directory, you can run:
+Includes history and undo.
 
-### `npm start`
+## State
+### `player`
+The current player as either `'X'` or `'O'`. (This character is printed directly on the board).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### `winner`
+The winner when the game is over as either `X` of `O`. Otherwise is `null`.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### `finished`
+`true` if game is finished, otherwise `false`.
 
-### `npm test`
+### `board`
+An array representing each square of the board as `{player, match}`. `board.player` is the player who played on that square, `board.match` is `true` if the play resulted in a 3-in-a-row match.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `score`: `{x, y}`
+The current score of each player.
 
-### `npm run build`
+### `history`
+An array that's appended to after each turn with 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+{
+    board: // the state of the board at the time
+    square: // index of square that was played
+    player: // the player that made the turn
+    score: // the score at the time
+}
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Elements
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `<Board>`
 
-### `npm run eject`
+```
+<Board
+    width=10
+    height=5
+    squares=[...]
+    onClick={(i) => ...} />
+```
+**The board of play.**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+`width` is the width of the board in number of squares.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+`height` is the height of the board in number of squares.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+`squares` is the current `state.board` (see definition above).
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+`onClick` is a closure to handle squares being clicked. The index of the square is passed to it.
 
-## Learn More
+### `<ScoreBoard>`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+<ScoreBoard
+    score={this.state.score}
+    currentPlayer={this.state.player} />
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**The scoreboard**
 
-### Code Splitting
+`score` is the score of each player as defined in **State**.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+`currentPlayer` is the current player as defined in **State**. This is used to visually indicate which player has their turn next.
 
-### Analyzing the Bundle Size
+### `<GameMenu>`
+```
+<GameMenu 
+    reset={()}
+    undo={()} />
+``` 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**Displays a list of actions related to the game**
 
-### Making a Progressive Web App
+`reset` is a closure to reset the game to a blank state. Takes no parameters.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+`undo` is a closure to undo the last action of the game. Takes no parameters.
 
-### Advanced Configuration
+### `<GameHistory>`
+```
+<GameHistory
+    history=[...]
+    entries="10" />
+```
+**Displays an abbreviated history of the game**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+`history` is the history of the game as defined in **State**.
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+`entries` is the number of entries to show. Eg. `entries=10` will show the last ten plays of the game.
