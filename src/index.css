@@ -1,13 +1,176 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font: 14px "Century Gothic", Futura, sans-serif;
+    margin: 20px;
+  }
+  
+  ol, ul {
+    padding-left: 30px;
+  }
+  
+  .board-row:after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+  
+  .status {
+    margin-bottom: 10px;
+  }
+  
+  .square {
+    background: #eee;
+    border: 1px solid white;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 34px;
+    height: 34px;
+    margin-right: -1px;
+    margin-top: -1px;
+    padding: 0;
+    text-align: center;
+    width: 34px;
+    float: left;
+  }
+
+  .board-row:nth-child(odd) .square:nth-child(odd), 
+  .board-row:nth-child(even) .square:nth-child(even) {
+    background-color: #ddd;
+  }
+
+  .player-X {
+    color: rgb(194, 86, 74);
+    
+  }
+
+  .player-O {
+    color: rgb(41, 128, 94);
+  }
+
+.match-X {
+    background: rgb(194, 86, 74) !important;
+    color: rgb(228, 182, 177);
+  }
+
+.match-O {
+  background: rgb(41, 128, 94) !important;
+  color: rgb(196, 230, 216);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.square:focus {
+  outline: none;
+}
+
+.kbd-navigation .square:focus {
+  background: #ddd;
+}
+
+.game {
+  margin: 0 auto;
+  width: 50em;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto 1fr;
+  gap: 10px;
+}
+
+.game-board {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: end;
+  padding: 1px;
+  border: 2px solid #777;
+  border-bottom: 2px solid #777;
+}
+
+.game-menu {
+  grid-column: 1;
+  grid-row: 3;
+  justify-self: end;
+}
+
+.game-menu button {
+  margin: 0.5em;
+}
+
+.history {
+  grid-column: 2;
+  grid-row: 2 / 4;
+  width: 15em;
+  font-size: 0.9em;
+  color: gray;
+  text-align: center;
+  padding-left: 2em;
+}
+
+.history h2 {
+  text-transform: uppercase;
+  border-bottom: 1px solid gray;
+  font-size: 0.8em;
+  margin: 0;
+  padding-bottom: 0.4em;
+  margin-bottom: 0.5em;
+}
+
+.history ol {
+  margin: 0;
+  padding: 0;
+  overflow: scroll;
+}
+
+.history li:first-child {
+  color: rgb(71, 71, 71);
+  animation: fadein 3s;
+}
+
+.scores {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: center;
+  border-radius: 5px;
+}
+
+.score-x, .score-o,
+.label-x, .label-o {
+  padding: 0.5em 1em;
+  display: inline-block;
+}
+
+.score-x, .score-o {
+  background-color: rgb(241, 241, 241);
+  box-shadow: 0 2px #999;
+}
+
+.score-x {
+  border-right: 3px dotted #999; 
+}
+
+.scores .current {
+  border-top: 10px solid rgb(255, 230, 0);
+}
+
+  
+.label-x {
+  background-color: rgb(160, 42, 29);
+  color: white;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  box-shadow: 0 2px rgb(107, 28, 19);
+  
+} 
+
+.label-o {
+  background-color: rgb(6, 98, 63);
+  color: white;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: 0 2px rgb(3, 56, 36);
+} 
+
+@keyframes fadein {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
 }
