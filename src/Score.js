@@ -1,3 +1,5 @@
+import React from 'react';
+
 export function ScoreBoard(props) {
     let labelClass = (player) => {
         let isCurrent = (player === props.currentPlayer) ? " current" : "";

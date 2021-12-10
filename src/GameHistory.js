@@ -1,3 +1,5 @@
+import React from 'react';
+
 export function GameHistory(props) {
     let entries = parseInt(props.entries);
     let history = props.history.slice();
