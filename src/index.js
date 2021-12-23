@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+import { Info } from './Info.js';
+import { Footer } from './Footer.js';
 import { Board } from './Board.js';
 import { ScoreBoard } from './Score.js';
 import { GameMenu } from './GameMenu.js';
@@ -192,7 +194,11 @@ class Game extends React.Component {
 // ========================================
 
 ReactDOM.render(
-    <Game />,
+    <main>
+        <Info />
+        <Game />
+        <Footer />
+    </main>,
     document.getElementById('root')
 );
 
